@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ballyclare | Healthcare Booking and Payments. Beautifully Connected.</title>
+  <meta name="description" content="Ballyclare is a modern healthcare application that simplifies appointment booking, consultation management and payments for patients and medical centres.">
+  <style>
+    :root {
+      --ink: #17252f;
+      --muted: #66747d;
+      --border: #dde3df;
+      --cream: #f7f5ef;
+      --navy: #16324f;
+      --navy-deep: #10263d;
+      --teal: #2f7f78;
+      --teal-dark: #256861;
+      --teal-soft: #e8f3f1;
+      --white: #fff;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container { width: 100%; max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Header */
+    header.site {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, .95);
+      border-bottom: 1px solid rgba(221, 227, 223, .7);
+      backdrop-filter: blur(6px);
+    }
+    header.site .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem 1.5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .brand { font-size: 1.5rem; font-weight: 600; letter-spacing: -.025em; color: var(--navy); }
+    nav { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 2rem; font-size: .875rem; font-weight: 500; color: var(--navy); }
+    nav a:not(.btn):hover { color: var(--teal-dark); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .75rem 1.25rem;
+      font: inherit;
+      font-size: .875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+      transition: background .2s, color .2s;
+    }
+    .btn-primary { background: var(--navy); color: var(--white); }
+    .btn-primary:hover { background: var(--navy-deep); }
+    .btn-secondary { background: var(--white); color: var(--navy); border-color: var(--border); box-shadow: none; }
+    .btn-secondary:hover { background: var(--teal-soft); }
+    nav .btn { border-radius: .75rem; }
+
+    /* Typography helpers */
+    .eyebrow {
+      margin: 0 0 1.25rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+    }
+    h1, h2, h3 { color: var(--navy); font-weight: 600; margin: 0; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.08; letter-spacing: -.025em; }
+    h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); line-height: 1.2; letter-spacing: -.02em; }
+    h3 { font-size: 1.125rem; }
+    p { margin: 0; }
+    .lead { font-size: 1.2rem; color: var(--muted); max-width: 40rem; }
+
+    /* Hero */
+    .hero {
+      background:
+        radial-gradient(60rem 30rem at 85% -10%, var(--teal-soft), transparent 70%),
+        var(--cream);
+      padding: 5rem 0 6rem;
+    }
+    .hero h1 { max-width: 48rem; }
+    .hero .lead { margin-top: 1.5rem; }
+    .hero .lead + .lead { margin-top: 1rem; }
+    .tagline { margin-top: 1.5rem; font-weight: 600; color: var(--teal-dark); font-size: 1.125rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+
+    /* Sections */
+    section { padding: 5rem 0; }
+    .section-head { max-width: 42rem; margin-bottom: 3rem; }
+    .section-head p { margin-top: 1rem; color: var(--muted); }
+
+    .white { background: var(--white); }
+
+    /* Feature cards */
+    .grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(22, 50, 79, .08); }
+    .card .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: .75rem;
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+    .card p { margin-top: .75rem; color: var(--muted); font-size: .975rem; }
+
+    /* Journey */
+    .split { display: grid; gap: 3rem; grid-template-columns: 1fr; align-items: center; }
+    @media (min-width: 56rem) { .split { grid-template-columns: 1fr 1fr; } }
+    .panel {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+    }
+    .panel h3 { color: var(--white); font-size: 1.5rem; }
+    .panel p { margin-top: 1rem; color: rgba(255, 255, 255, .82); }
+
+    /* CTA */
+    .cta {
+      background: var(--navy-deep);
+      color: var(--white);
+      text-align: center;
+    }
+    .cta h2 { color: var(--white); }
+    .cta p { margin: 1rem auto 0; max-width: 36rem; color: rgba(255, 255, 255, .8); }
+    .cta .actions { justify-content: center; }
+    .cta .btn-primary { background: var(--teal); }
+    .cta .btn-primary:hover { background: var(--teal-dark); }
+
+    /* Content blocks */
+    .stack > * + * { margin-top: 1.25rem; }
+    .stack p { color: var(--muted); font-size: 1.05rem; }
+    .journeys { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); margin-top: 3rem; }
+    .journeys .panel { grid-column: 1 / -1; text-align: center; }
+    .realities { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1rem; }
+    .realities li {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: .75rem;
+      padding: 1rem 1.25rem;
+      color: var(--ink);
+    }
+
+    /* Footer */
+    footer { background: var(--white); border-top: 1px solid var(--border); padding: 2rem 0; font-size: .875rem; color: var(--muted); }
+    footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+    footer a:hover { color: var(--teal-dark); }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="container">
+      <a href="#top" class="brand">Ballyclare</a>
+      <nav aria-label="Primary">
+        <a href="#payments">Payments</a>
+        <a href="#workflows">Workflows</a>
+        <a href="#care">Care</a>
+        <a class="btn btn-primary" href="#discover">Discover Ballyclare</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="container">
+        <p class="eyebrow">Ballyclare</p>
+        <h1>Healthcare Booking and Payments. Beautifully Connected.</h1>
+        <p class="tagline">A smarter approach to appointments, payments and patient care.</p>
+        <p class="lead">Ballyclare is a modern healthcare application designed to simplify the way patients book appointments, healthcare teams manage consultations and medical centres handle payments.</p>
+        <p class="lead">At the heart of the platform is an integrated booking and payment system that understands the different ways healthcare services are delivered.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#payments">Explore the platform</a>
+          <a class="btn btn-secondary" href="#workflows">Designed for real workflows</a>
+        </div>
+      </div>
+    </div>
+
+    <section id="payments">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Booking and payments</p>
+          <h2>More Than Just Online Payments</h2>
+        </div>
+        <div class="stack">
+          <p>Traditional booking systems often treat appointments and payments as separate processes.</p>
+          <p><strong>Ballyclare brings them together.</strong></p>
+        </div>
+        <div class="journeys">
+          <article class="card">
+            <span class="icon" aria-hidden="true">01</span>
+            <h3>Booking online</h3>
+            <p>Patients booking online can securely reserve an available appointment and complete payment before their booking is confirmed.</p>
+          </article>
+          <article class="card">
+            <span class="icon" aria-hidden="true">02</span>
+            <h3>Booked by practice staff</h3>
+            <p>For appointments arranged directly by practice staff, the system supports a more flexible approach: create the appointment, record the consultation charge and take payment immediately or leave an outstanding balance for later settlement.</p>
+          </article>
+          <div class="panel">
+            <h3>Two booking journeys. One connected financial system.</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflows" class="white">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Workflows</p>
+          <h2>Designed for Real Healthcare Workflows</h2>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <span class="icon" aria-hidden="true">01</span>
+            <h3>Secure Online Booking</h3>
+            <p>Patients can discover available appointments, temporarily reserve their selected slot and complete payment through Stripe before their booking is finalised.</p>
+          </article>
+          <article class="card">
+            <span class="icon" aria-hidden="true">02</span>
+            <h3>Flexible Practice Payments</h3>
+            <p>Practice staff can book appointments without requiring immediate payment, ensuring that administrative or payment circumstances do not unnecessarily prevent a consultation from being arranged.</p>
+          </article>
+          <article class="card">
+            <span class="icon" aria-hidden="true">03</span>
+            <h3>Outstanding Balance Management</h3>
+            <p>Consultation charges, successful payments, partial payments and refunds are connected to the appointment, providing a clearer picture of what has been paid and what remains outstanding.</p>
+          </article>
+          <article class="card">
+            <span class="icon" aria-hidden="true">04</span>
+            <h3>Patient Payment Visibility</h3>
+            <p>The patient portal provides access to payment history, receipts and outstanding balances, with support for paying existing charges.</p>
+          </article>
+          <article class="card">
+            <span class="icon" aria-hidden="true">05</span>
+            <h3>Reliable Payment Processing</h3>
+            <p>The platform is designed to handle payment confirmations, failures, repeated provider notifications and refund updates without creating duplicate bookings or financial records.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="care">
+      <div class="container split">
+        <div>
+          <p class="eyebrow">Care first</p>
+          <h2>Built Around Care, Not Just Transactions</h2>
+          <div class="stack" style="margin-top: 1.5rem;">
+            <p>Healthcare is not always a simple pay-and-book experience.</p>
+            <p>Ballyclare is being built to accommodate these realities within one connected application.</p>
+          </div>
+        </div>
+        <ul class="realities">
+          <li>Sometimes patients pay online before their visit.</li>
+          <li>Sometimes appointments are arranged by reception staff.</li>
+          <li>Sometimes a balance remains outstanding.</li>
+          <li>Sometimes a refund becomes necessary.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="about" class="white">
+      <div class="container split">
+        <div>
+          <p class="eyebrow">The future</p>
+          <h2>A More Connected Future for Medical Care</h2>
+        </div>
+        <p class="lead">By bringing together appointment scheduling, patient services, clinical operations and integrated payment management, Ballyclare aims to make everyday healthcare administration simpler and the patient experience more convenient.</p>
+      </div>
+    </section>
+
+    <section id="discover" class="cta">
+      <div class="container">
+        <h2>Ballyclare</h2>
+        <p>Where Better Healthcare Meets Smarter Technology.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>&copy; 2026 Powered by mercantiworld</span>
+      <span>Healthcare Booking and Payments. Beautifully Connected.</span>
+    </div>
+  </footer>
+</body>
+</html>
